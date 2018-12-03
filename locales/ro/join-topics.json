@@ -1,0 +1,11 @@
+{
+    "join_topics": {
+        "name": "Join by topics",
+        "label": {
+            "name": "Nume",
+            "topics": "Topicuri"
+        },
+        "placeholder": {},
+        "error": {}
+    }
+}

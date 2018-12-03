@@ -1,0 +1,11 @@
+{
+    "join_topics": {
+        "name": "Join by topics",
+        "label": {
+            "name": "Name",
+            "topics": "Topics"
+        },
+        "placeholder": {},
+        "error": {}
+    }
+}

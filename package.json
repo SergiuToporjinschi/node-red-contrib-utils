@@ -1,0 +1,29 @@
+{
+  "name": "node-red-contrib-utils",
+  "version": "0.0.1",
+  "contributors": [],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "A node-red utils node collection.",
+  "homepage": "https://github.com/SergiuToporjinschi/node-red-contrib-utils#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "node-red": {
+    "nodes": {
+      "join-topics": "join-topics.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergiuToporjinschi/node-red-contrib-utils.git"
+  },
+  "keywords": [
+    "node-red"
+  ],
+  "author": "Sergiu Toporjinschi",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/SergiuToporjinschi/node-red-contrib-utils/issues"
+  }
+}

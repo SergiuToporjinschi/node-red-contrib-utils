@@ -1,0 +1,116 @@
+<script type="text/html text/x-red" data-template-name="join-topics">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="join_topics.label.name"></span></label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="node-row-msg-concat">
+        <div class="form-row">
+            <label data-i18n="join_topics.label.topics"></label>
+            <div class="form-row node-input-topics-container-row">
+                <ol id="node-input-topics-container"></ol>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType("join-topics", {
+        category: 'function',
+        color: 'rgb(226, 217, 110)',
+        defaults: {
+            name: { value: 'Join by topics' },
+            topics: { value: [{ topic: "" }] }
+        },
+        inputs: 1,
+        outputs: 1,
+        align: "left",
+        icon: "join.png",
+        // paletteLabel: "Join by topics",
+        label: function () {
+            return this.name || this._("join_topics.name");;
+        },
+        oneditprepare: function () {
+            function resizeTopics(topic) {
+                var newWidth = topic.width();
+                topic.find('.red-ui-typedInput').typedInput("width", newWidth - 125);
+            }
+            $("#node-input-topics-container")
+                .css('min-height', '200px').css('min-width', '500px')
+                .editableList({
+                    addItem: function (container, i, opt) {
+                        if (!opt.hasOwnProperty('topic')) {
+                            opt.topic = "";
+                        }
+                        var row = $('<div/>').appendTo(container);
+                        var valueField = $('<input/>', {
+                            class: "node-input-topic-value",
+                            type: "text",
+                            style: "margin-left: 5px"
+                        }).appendTo(row).typedInput({ default: 'str', types: ['str'] });
+                        valueField.typedInput('value', opt.topic);
+                        valueField.typedInput('type', 'str');
+
+                        var selectField = $('<select/>', { class: "node-input-mandatory-type", style: "width:105px; margin-left:10px;" }).appendTo(row);
+                        var selectOptions = [{ v: true, l: "mandatory" }, { v: false, l: "optional" }];
+                        for (var i = 0; i < 2; i++) {
+                            selectField.append($("<option></option>").val(selectOptions[i].v).text(selectOptions[i].l));
+                        }
+                        selectField.val(opt.mandatory.toString());
+                        resizeTopics(container);
+                    },
+                    resizeItem: resizeTopics,
+                    sortable: true,
+                    removable: true
+                });
+            var topics = this.topics;
+            var container = $("#node-input-topics-container");
+            container.editableList('empty');
+            for (var i = 0; i < topics.length; i++) {
+                var topic = topics[i];
+                container.editableList('addItem', topic);
+            }
+        },
+        oneditsave: function () {
+            var topics = $("#node-input-topics-container").editableList('items');
+            var node = this;
+            node.topics = [];
+            topics.each(function (i) {
+                var topicData = $(this).data('data');
+                var topic = $(this);
+                var vf = topic.find(".node-input-topic-value");
+                var value = vf.typedInput('value');
+                var type = vf.typedInput('type');
+                var tm = topic.find('.node-input-mandatory-type');
+                var r = { topic: value, mandatory: tm.val() === 'true' };
+                node.topics.push(r);
+            });
+        },
+        oneditcancel: function () {
+        },
+        oneditresize: function (size) {
+        }
+    });
+</script>
+<script type="text/html text/x-red" data-help-name="join-topics">
+    <p>Concatenates multiple messages based on a list of topics;</p>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>Topics <span class="property-type">List of objects</span></dt>
+        <dd>List of objects as guidance for concatenation</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>Topic <span class="property-type">String</span></dt>
+        <dd>Expected topics</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>Mandatory <span class="property-type">Mandatory/Optional</span></dt>
+        <dd>The message will not be emitted through output if one of the mandatory topics is missing</dd>
+    </dl>
+    <h3>Inputs</h3>
+    <p>Multiple messages that contains topic and payload</p>
+
+    <h3>Output</h3>
+    <p>A message with all received topics as key and their payloads as values</p>
+    <p>If multiple meessages will have the same topic, the last message will be considered</p>
+    <P>The output message will be emitted when the last mandatory topic arrives. If there are no mandatory topics then will be emitted when all optional topics are received.<p>
+</script>
