@@ -4,8 +4,6 @@
         "label": {
             "name": "Name",
             "topics": "Topics"
-        },
-        "placeholder": {},
-        "error": {}
+        }
     }
 }

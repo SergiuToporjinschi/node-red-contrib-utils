@@ -4,8 +4,6 @@
         "label": {
             "name": "Nume",
             "topics": "Topicuri"
-        },
-        "placeholder": {},
-        "error": {}
+        }
     }
 }
