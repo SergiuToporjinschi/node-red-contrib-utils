@@ -1,7 +1,7 @@
 var should = require("should");
 var helper = require("node-red-node-test-helper");
 var joinNode = require("../src/join-topics.js");
-console.log('init');
+
 helper.init(require.resolve('node-red'));
 
 describe('join-topics Node', function () {
