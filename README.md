@@ -6,6 +6,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/SergiuToporjinschi/node-red-contrib-utils.svg)](https://github.com/SergiuToporjinschi/node-red-contrib-utils/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/SergiuToporjinschi/node-red-contrib-utils.svg)](https://github.com/SergiuToporjinschi/node-red-contrib-utils/watchers)
 [![GitHub license](https://img.shields.io/github/license/SergiuToporjinschi/node-red-contrib-utils.svg)](https://github.com/SergiuToporjinschi/node-red-contrib-utils/blob/master/LICENSE)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/SergiuToporjinschi/node-red-contrib-utils)
+[![Package Quality](http://npm.packagequality.com/shield/node-red-contrib-utils.svg)](http://packagequality.com/#?package=node-red-contrib-utils)
 
 # node-red-contrib-utils
 Concatenates multiple messages based on a list of topics;
